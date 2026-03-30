@@ -1,0 +1,380 @@
+<link rel="stylesheet" href="/css/market.css">
+
+<div class="mp-overlay">
+
+  <div class="mp-container">
+
+    <h2 class="mp-title">Market Price Checker</h2>
+    <p class="mp-subtitle">Check latest crop prices in different states</p>
+
+    <!-- Crop Selection -->
+    <div class="mp-crop-selection">
+      <input type="text" class="mp-crop-search" placeholder="Type crop name..." />
+      <div class="mp-crop-cards">
+        <div class="mp-crop-card" data-crop="Rice"><img src="/images/rice.jpg" alt="Rice">Rice 🌾</div>
+        <div class="mp-crop-card" data-crop="Wheat"><img src="/images/wheat.jpg" alt="Wheat">Wheat 🌾</div>
+        <div class="mp-crop-card" data-crop="Maize"><img src="/images/corn.jpg" alt="Maize">Maize 🌽</div>
+        <div class="mp-crop-card" data-crop="Cotton"><img src="/images/cotton.jpg" alt="Cotton">Cotton 🌿</div>
+        <div class="mp-crop-card" data-crop="Onion"><img src="/images/onion.jpg" alt="Onion">Onion 🧅</div>
+      </div>
+    </div>
+
+    <!-- State Selection Form -->
+    <form class="mp-form" action="/market/check" method="POST">
+      <span class="mp-close-btn" onclick="window.location='/'">✖</span>
+      <div class="mp-input-group">
+        <label for="state">Select State</label>
+        <select class="mp-state-select" name="state">
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Gujarat">Gujarat</option>
+        </select>
+      </div>
+      <input type="hidden" name="crop" class="mp-selected-crop">
+      <button class="mp-btn" type="submit">Check Price</button>
+    </form>
+
+    <!-- RESULT SECTION -->
+    <div class="mp-result-section" style="<%= result ? 'display:flex;' : 'display:none;' %>">
+      <% if(result && result.length > 0){ %>
+        <h3>📊 Market Prices</h3>
+        <p><strong>Crop:</strong> <%= crop %> | <strong>State:</strong> <%= state %></p>
+
+        <div class="mp-best-market-card">
+          ⭐ Best Market: <%= bestMarket.market %> - ₹ <%= bestMarket.modal_price %>
+        </div>
+
+        <div class="mp-mandi-cards">
+          <% result.forEach(item => { %>
+            <div class="mp-mandi-card <%= item.market === bestMarket.market ? 'best' : '' %>">
+              <h4><%= item.market %></h4>
+              <p>Min: ₹ <%= item.min_price %></p>
+              <p>Max: ₹ <%= item.max_price %></p>
+              <p>Modal: ₹ <%= item.modal_price %></p>
+            </div>
+          <% }) %>
+        </div>
+
+        <canvas id="mpPriceChart" width="400" height="200"></canvas>
+      <% } else if(result){ %>
+        <p style="color:red;">No data available for selected crop and state.</p>
+      <% } %>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Crop card selection
+  const cropCards = document.querySelectorAll('.mp-crop-card');
+  const selectedCropInput = document.querySelector('.mp-selected-crop');
+  const cropSearchInput = document.querySelector('.mp-crop-search');
+  const resultSection = document.querySelector('.mp-result-section');
+
+  cropCards.forEach(card => {
+    card.addEventListener('click', () => {
+      cropCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedCropInput.value = card.dataset.crop;
+    });
+  });
+
+  // Autocomplete filter
+  cropSearchInput.addEventListener('input', () => {
+    const term = cropSearchInput.value.toLowerCase();
+    cropCards.forEach(card => {
+      if(card.dataset.crop.toLowerCase().includes(term)){
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+
+  // Show result after form submission
+  const marketForm = document.querySelector('.mp-form');
+  
+  // Chart
+  const resultData = <%- JSON.stringify(result || []) %>;
+  if(resultData.length > 0){
+      const ctx = document.getElementById('mpPriceChart').getContext('2d');
+      const labels = resultData.map(item => item.market);
+      const modalPrices = resultData.map(item => parseInt(item.modal_price));
+
+      // Colorful bar gradients
+      const bgColors = modalPrices.map((_, i) => `hsl(${i * 50 % 360}, 70%, 60%)`);
+      const borderColors = modalPrices.map((_, i) => `hsl(${i * 50 % 360}, 70%, 40%)`);
+
+      new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: 'Modal Price (₹/Quintal)',
+                  data: modalPrices,
+                  backgroundColor: bgColors,
+                  borderColor: borderColors,
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              plugins: { legend: { display: false } },
+              scales: { y: { beginAtZero: true } }
+          }
+      });
+  }
+</script>
+
+
+
+
+<!--<style>
+  /* Overlay & container */
+
+.mp-overlay {
+
+  background: rgba(0,0,0,0.4);
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  overflow-y:auto;
+  z-index:1000;
+  font-family: 'Poppins', sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:30px 0;
+}
+
+.mp-container {
+  
+  max-width: 1000px;
+  width: 95%;
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px 35px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  position: relative;
+  background-color: #abe7ae;
+}
+
+/* Titles */
+.mp-title {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #333;
+}
+
+.mp-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+/* Crop selection cards */
+.mp-crop-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.mp-crop-card {
+  width: 160px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: #f4f6f8;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.mp-crop-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+  margin-bottom: 10px;
+}
+
+.mp-crop-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background-color: #e1f5fe;
+}
+
+.mp-crop-card.selected {
+  border: 3px solid #4caf50;
+  background-color: #d0f0c0;
+  font-weight: bold;
+}
+
+/* Search input */
+.mp-crop-search {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin: 0 auto 15px auto;
+  display: block;
+}
+
+/* Form styling */
+.mp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.mp-input-group {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
+}
+
+.mp-input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.mp-state-select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.mp-btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  background-color: #4caf50;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.mp-btn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Close button */
+.mp-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.mp-close-btn:hover {
+  color: #ff5252;
+}
+
+/* Result section */
+.mp-result-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}*/
+
+/* Best market card */
+.mp-best-market-card {
+  background: linear-gradient(90deg, #ffde7d, #ffb347);
+  padding: 18px 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #333;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Mandi cards */
+.mp-mandi-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.mp-mandi-card {
+  flex: 1 1 220px;
+  min-width: 200px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  padding: 18px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+}
+
+.mp-mandi-card.best {
+  border: 2px solid #4caf50;
+  background: linear-gradient(135deg, #d4ffe0, #a2f2b1);
+  font-weight: 600;
+}
+
+.mp-mandi-card h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.mp-mandi-card p {
+  margin: 6px 0;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Chart canvas */
+#mpPriceChart {
+  margin-top: 25px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media(max-width: 768px){
+  .mp-crop-card { width: 140px; height:180px; font-size:0.9rem;}
+  .mp-mandi-card { flex:1 1 160px; font-size:0.9rem; padding:15px;}
+  .mp-title { font-size:2rem; }
+  .mp-subtitle { font-size:1rem; }
+}
+</style>-->

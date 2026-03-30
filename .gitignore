@@ -1,0 +1,53 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+agroverse-env/
+PlantDiseaseML/venv/
+
+# Logs
+*.log
+
+# Node / JS
+node_modules/
+AgroVerse/node_modules/
+npm-debug.log*
+package-lock.json
+
+# OS generated
+.DS_Store
+Thumbs.db*
+
+# IDE / Editor
+.vscode/
+.idea/
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Datasets / large files
+dataset/
+PlantDiseaseML/dataset/
+
+# Machine Learning models
+*.h5
+*.hdf5
+*.ckpt
+*.pt
+*.pth
+
+# Uploads (runtime files)
+AgroVerse/public/uploads/
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Temp
+*~

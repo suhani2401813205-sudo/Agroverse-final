@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AgroVerse Disease Detection</title>
+
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+
+<h2><i class="fa-solid fa-leaf"></i> Crop Disease Detection</h2>
+
+<form id="form" action="/predict" method="POST" enctype="multipart/form-data">
+  <span class="close-btn" onclick="window.location='/'">✖</span>
+  
+  <label>Select Crop</label>
+  <select name="cropType" required>
+    <option value="">Select</option>
+    <option>Tomato</option>
+    <option>Potato</option>
+    <option>Pepper Bell</option>
+  </select>
+
+
+<label>Upload Image</label>
+  <input type="file" name="file" id="fileInput" required>
+
+<!-- ADD THIS -->
+<div id="preview" class="preview"></div>
+  <button type="submit">Detect Disease</button>
+
+</form>
+
+   
+   
+  
+ <!-- RESULT SECTION -->
+<div class="result" id="resultBox">
+  <h3 id="disease"></h3>
+  <p id="confidence"></p>
+  <p id="severity"></p>
+  <p id="cause"></p>
+  <p id="treatment"></p>
+  <p id="prevention"></p>
+
+  <div class="top3" id="top3"></div>
+</div>
+
+  </div>
+</div>
+
+
+<script>
+  const preview = document.getElementById("preview");
+const fileInput = document.getElementById("fileInput");
+
+fileInput.addEventListener("change", () => {
+  preview.innerHTML = "";
+  const file = fileInput.files[0];
+
+  if(file){
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    preview.appendChild(img);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<div class="result-container">
+
+<h2><i class="fas fa-leaf"></i> Disease Detection Result</h2>
+<span class="close-btn" onclick="window.location='/'">✖</span>
+  <div class="result-card">
+
+<!-- Uploaded Image -->
+<div class="image-section">
+  <h4>Uploaded Leaf</h4>
+  <img src="/uploads/<%= uploadedImage %>" alt="Uploaded Image">
+</div>
+
+<!-- Disease Info -->
+<div class="info-section">
+
+  <h3><%= diseaseName %></h3>
+  <p><i class="fas fa-chart-line"></i> <strong>Confidence:</strong> <%= confidence %>%</p>
+
+<p><i class="fas fa-exclamation-triangle"></i> <strong>Severity:</strong> <%= severity %></p>
+
+<p><i class="fas fa-info-circle"></i> <strong>Description:</strong> <%= severityDesc %></p>
+
+<p><i class="fas fa-bacteria"></i> <strong>Cause:</strong> <%= cause %></p>
+  <hr>
+
+  <p><i class="fas fa-pills"></i> <strong>Treatment:</strong> <%= treatment %></p>
+
+<p><i class="fas fa-shield-alt"></i> <strong>Prevention:</strong> <%= prevention %></p>
+</div>
+
+
+  </div>
+
+  <!-- Top 3 Predictions -->
+
+  <div class="top3-section">
+    <h3><i class="fas fa-search"></i> Top Predictions</h3>
+
+<div class="top3-grid">
+  <% top3.forEach(item => { %>
+    <div class="top-card">
+      <p><%= item.name %></p>
+      <span><%= item.confidence %>%</span>
+    </div>
+  <% }) %>
+</div>
+
+
+  </div>
+  <!-- 📊 Chart -->
+<div class="chart-section">
+  <h3><i class="fas fa-chart-bar"></i> Prediction Confidence</h3>
+  <canvas id="barChart"></canvas>
+</div>
+
+
+  <!-- Grad-CAM (Optional) -->
+
+<% if (gradcamImage) { %> <div class="gradcam-section"> <h3><i class="fas fa-fire"></i> Model Focus (Grad-CAM)</h3> <img src="/gradcam/<%= gradcamImage %>" alt="GradCAM"> </div>
+<% } %>
+
+</div>
+
+
+<script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = <%- JSON.stringify(top3.map(item => item.name)) %>;
+const dataValues = <%- JSON.stringify(top3.map(item => item.confidence)) %>;
+
+const ctx = document.getElementById("barChart").getContext("2d");
+
+// gradients
+const gradient1 = ctx.createLinearGradient(0, 0, 0, 300);
+gradient1.addColorStop(0, "#2ecc71");
+gradient1.addColorStop(1, "#27ae60");
+
+const gradient2 = ctx.createLinearGradient(0, 0, 0, 300);
+gradient2.addColorStop(0, "#f1c40f");
+gradient2.addColorStop(1, "#f39c12");
+
+const gradient3 = ctx.createLinearGradient(0, 0, 0, 300);
+gradient3.addColorStop(0, "#e74c3c");
+gradient3.addColorStop(1, "#c0392b");
+
+// chart
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Confidence %',
+      data: dataValues,
+      backgroundColor: [gradient1, gradient2, gradient3],
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true
+  }
+});
+</script>

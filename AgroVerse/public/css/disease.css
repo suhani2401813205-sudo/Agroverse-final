@@ -1,0 +1,303 @@
+/* 🌿 Main Container */
+.result-container {
+  padding: 25px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  background: #e0fde4;
+}
+
+/* 🌿 Title */
+.result-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* 🌿 Card */
+.result-card {
+  display: flex;
+  gap: 25px;
+  background: linear-gradient(135deg, #ffffff, #f9fcff);
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* 🌿 Image */
+.image-section img {
+  width: 260px;
+  border-radius: 14px;
+  transition: transform 0.3s ease;
+}
+
+.image-section img:hover {
+  transform: scale(1.05);
+}
+
+/* 🌿 Info */
+.info-section {
+  flex: 1;
+}
+
+.info-section h3 {
+  color: #27ae60;
+  margin-bottom: 10px;
+}
+
+/* 🌿 Info Text */
+.info-section p {
+  margin: 8px 0;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.info-section p:hover {
+  color: #000;
+  transform: translateX(5px);
+}
+
+/* 🌿 Divider */
+.info-section hr {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+/* 🌿 Top 3 Section */
+.top3-section {
+  margin-top: 30px;
+}
+
+.top3-section h3 {
+  color: #34495e;
+}
+
+/* 🌿 Top Cards */
+.top3-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.top-card {
+  flex: 1;
+  background: linear-gradient(135deg, #ffffff, #f4f9f6);
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e0f2e9;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.top-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* 🌿 Top Card Text */
+.top-card p {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.top-card span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+/* 🌿 Chart Section */
+.chart-section {
+  margin-top: 35px;
+  background: linear-gradient(135deg, #ffffff, #eef6ff);
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.chart-section:hover {
+  transform: translateY(-5px);
+}
+
+.chart-section h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+/* 🌿 GradCAM */
+.gradcam-section {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.gradcam-section img {
+  width: 320px;
+  border-radius: 14px;
+  transition: transform 0.3s ease;
+}
+
+.gradcam-section img:hover {
+  transform: scale(1.05);
+}
+
+/* 🌿 Icons */
+.result-container i {
+  margin-right: 8px;
+  color: #27ae60;
+  transition: transform 0.2s ease;
+}
+
+.result-container i:hover {
+  transform: scale(1.2);
+  color: #16a085;
+}
+
+/* 🌿 Buttons / Interactive Feel (future use) */
+button {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #219150, #27ae60);
+  transform: translateY(-2px);
+}
+
+/* 🌿 Responsive */
+@media (max-width: 768px) {
+  .result-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top3-grid {
+    flex-direction: column;
+  }
+
+  .image-section img {
+    width: 100%;
+  }
+}
+
+/* 🌿 Page Background */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0fde4, #f4f9ff);
+  margin: 0;
+}
+
+/* 🌿 Main Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 🌿 Card (Same as result page feel) */
+.card {
+  background: linear-gradient(135deg, #ffffff, #f9fcff);
+  padding: 30px;
+  border-radius: 18px;
+  width: 95%;
+  max-width: 550px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* 🌿 Title */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* 🌿 Labels */
+label {
+  font-weight: 600;
+  color: #34495e;
+}
+
+/* 🌿 Inputs */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: #27ae60;
+  outline: none;
+  box-shadow: 0 0 5px rgba(39,174,96,0.3);
+}
+
+/* 🌿 Button */
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #219150, #27ae60);
+  transform: translateY(-2px);
+}
+
+/* 🌿 Image Preview */
+.preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.preview img {
+  max-width: 220px;
+  border-radius: 14px;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+.preview img:hover {
+  transform: scale(1.05);
+}
+
+/* 🌿 Smooth Animation */
+.card, button, input {
+  transition: all 0.3s ease;
+}
+
+/* 🌿 Responsive */
+@media (max-width: 768px) {
+  .card {
+    padding: 20px;
+  }
+}

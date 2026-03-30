@@ -1,0 +1,232 @@
+<div class="center-page">
+  <div class="crop-card">
+
+    <h2 id ="title">🌱 Smart Crop Selection</h2>
+
+    <form action="/crop/result" method="POST">
+      <span class="close-btn" onclick="window.location='/'">✖</span>
+
+      <!-- 🌾 SEASON -->
+      <h3>Select Season</h3>
+      <div class="card-container">
+        <div class="card" onclick="selectOption(event,'season','Kharif')">
+          <img src="/images/kharif.jpg">
+          <p>Kharif</p>
+        </div>
+        <div class="card" onclick="selectOption(event,'season','Rabi')">
+          <img src="/images/rabi.jpeg">
+          <p>Rabi</p>
+        </div>
+        <div class="card" onclick="selectOption(event,'season','Zaid')">
+          <img src="/images/zaid.jpeg">
+          <p>Zaid</p>
+        </div>
+      </div>
+      <input type="hidden" name="season" id="season">
+
+      <!-- 🟤 SOIL -->
+      <h3>Soil Type</h3>
+      <div class="card-container">
+        <div class="card" onclick="selectOption(event,'soilType','Black')">Black</div>
+        <div class="card" onclick="selectOption(event,'soilType','Red')">Red</div>
+        <div class="card" onclick="selectOption(event,'soilType','Alluvial')">Alluvial</div>
+      </div>
+      <input type="hidden" name="soilType" id="soilType">
+
+      <!-- 💧 WATER -->
+      <h3>Water Level</h3>
+      <div class="card-container">
+        <div class="card" onclick="selectOption(event,'waterLevel','Low')">Low</div>
+        <div class="card" onclick="selectOption(event,'waterLevel','Medium')">Medium</div>
+        <div class="card" onclick="selectOption(event,'waterLevel','High')">High</div>
+      </div>
+      <input type="hidden" name="waterLevel" id="waterLevel">
+
+      <!-- 🌡️ TEMPERATURE -->
+      <h3>Temperature</h3>
+      <div class="card-container">
+        <div class="card" onclick="selectOption(event,'temperature','Below 20')">Below 20°C</div>
+        <div class="card" onclick="selectOption(event,'temperature','20-30')">20–30°C</div>
+        <div class="card" onclick="selectOption(event,'temperature','Above 30')">Above 30°C</div>
+      </div>
+      <input type="hidden" name="temperature" id="temperature">
+
+      <!-- 🌍 LOCATION -->
+      <h3>Location</h3>
+      <div class="card-container">
+        <div class="card" onclick="selectOption(event,'locationType','Plains')">Plains</div>
+        <div class="card" onclick="selectOption(event,'locationType','Hilly')">Hilly</div>
+        <div class="card" onclick="selectOption(event,'locationType','Dry')">Dry</div>
+      </div>
+      <input type="hidden" name="locationType" id="locationType">
+
+      <!-- 🌾 LAND SIZE -->
+      <h3>Land Size</h3>
+      <div class="card-container">
+        <div class="card" onclick="selectOption(event,'landSize','Small')">Small (&lt;1 acre)</div>
+        <div class="card" onclick="selectOption(event,'landSize','Medium')">1–5 acres</div>
+        <div class="card" onclick="selectOption(event,'landSize','Large')">5+ acres</div>
+      </div>
+      <input type="hidden" name="landSize" id="landSize">
+
+      <!-- 🚀 SUBMIT -->
+      <button type="submit" class="btn">🚀 Get Recommendation</button>
+
+    </form>
+
+  </div>
+</div>
+
+<!-- ⚙️ JS -->
+<script>
+function selectOption(event, field, value) {
+
+  // set hidden input value
+  document.getElementById(field).value = value;
+
+  // remove active from same group
+  let container = event.currentTarget.closest('.card-container');
+  container.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+
+  // add active
+  event.currentTarget.classList.add('active');
+}
+</script>
+
+<script>
+document.querySelector("form").addEventListener("submit", function(e) {
+
+  const fields = [
+    "season",
+    "soilType",
+    "waterLevel",
+    "temperature",
+    "locationType",
+    "landSize"
+  ];
+
+  for (let field of fields) {
+    if (!document.getElementById(field).value) {
+      alert("⚠️ Please select all fields before continuing!");
+      e.preventDefault();
+      return;
+    }
+  }
+
+});
+</script>
+
+<!--<style>
+  body {
+  background: linear-gradient(to right, #a8e063, #56ab2f);
+  font-family: Arial;
+  
+}
+
+
+#title{
+  color: #56ab2f ;
+}
+/* CENTER */
+.center-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #b9fc99;
+}
+
+/* MAIN CONTAINER (BIG NOW 🔥) */
+.crop-card {
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  width: 900px; /* 🔥 BIG WIDTH */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  
+}
+/* HEADINGS */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* ROW LAYOUT */
+.card-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  color:#b9fc99
+}
+
+/* CARD */
+.card {
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  background: #57e95e;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+/* HOVER */
+.card:hover {
+  background: #d4f5d4;
+}
+
+/* ✅ ACTIVE SELECTION (VERY CLEAR 🔥) */
+.card.active {
+  background: green;
+  color: rgb(241, 248, 238);
+  border: 3px solid darkgreen;
+  transform: scale(1.05);
+}
+
+/* IMAGE */
+.card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  background: green;
+  color: rgb(232, 239, 234);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+</style>
+
+
+
+-->

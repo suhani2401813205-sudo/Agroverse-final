@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/header') %>
+</head>
+<body>
+
+    <%- include('../partials/navbar') %>
+
+    <main>
+        <%- body %>
+    </main>
+
+   <% if (typeof showFooter === "undefined" || showFooter !== false) { %>
+    <%- include('../partials/footer') %>
+<% } %>
+
+    <!-- Page Specific JS -->
+    <script src="/js/home.js"></script>
+
+</body>
+</html>

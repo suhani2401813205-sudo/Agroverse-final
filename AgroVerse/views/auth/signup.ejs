@@ -1,0 +1,48 @@
+
+
+<div class="login-overlay">
+  <div class="form-container login-box">
+
+    <span class="close-btn" onclick="window.location.href='/'">✖</span>
+
+    <h2>AGROVERSE</h2>
+    <p class="subtitle">Create your account</p>
+
+    <form action="/auth/signup" method="POST">
+
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Enter full name" required>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter email" required>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Create password" required>
+      </div>
+
+      <div class="input-group">
+        <label>Confirm Password</label>
+        <input type="password" name="confirmPassword" placeholder="Confirm password" required>
+      </div>
+
+      <button type="submit" class="btn green">
+        Sign Up
+      </button>
+
+    </form>
+
+    <p class="bottom-text">
+      Already have an account?
+      <a href="/auth/login">Login</a>
+
+    </p>
+
+  </div>
+</div>
+
+

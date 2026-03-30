@@ -1,0 +1,111 @@
+/* =========================
+   FERTILIZER PAGE
+========================= */
+
+.center-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  padding: 20px;
+}
+
+/* Glass Card */
+.fertilizer-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  padding: 40px 35px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  color: white;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Heading */
+.fertilizer-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Labels */
+.fertilizer-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Select Fields */
+.fertilizer-card select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Button */
+.fertilizer-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #81c784, #43a047);
+  color: white;
+  transition: 0.3s;
+}
+
+.fertilizer-card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Recommendation Result Box */
+.fertilizer-card .recommendation {
+  margin-top: 25px;
+  padding: 20px 18px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  animation: fadeIn 0.5s ease;
+}
+
+.fertilizer-card .recommendation h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.fertilizer-card .recommendation p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #e0f2f1;
+}
+
+.fertilizer-card .recommendation hr {
+  border: 0;
+  height: 1px;
+  background: #81c784;
+  margin: 12px 0;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
