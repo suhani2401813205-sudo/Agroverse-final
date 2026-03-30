@@ -1,48 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroVerse - Login</title>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<section class="login-overlay">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <div class="form-container login-box">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/auth.css">
 
-    <!-- Close Button -->
-    <span class="close-btn" onclick="window.location='/'">✖</span>
+</head>
+<body>
 
-    <h2 style="text-align:center;">AGROVERSE</h2>
-    <p class="login-subtitle">Login to your account</p>
+  <section class="login-overlay">
+    <div class="form-container login-box">
 
-    <form action="/auth/login" method="POST" class="login-form">
+      <!-- Close Button -->
+      <span class="close-btn" onclick="window.location='/'">✖</span>
 
-      <div class="input-group">
-        <label for="userInput">Email or Mobile</label>
-        <input 
-          type="text" 
-          id="userInput"
-          name="userInput" 
-          placeholder="Enter email or mobile" 
-          required>
-      </div>
+      <h2>AGROVERSE</h2>
+      <p class="login-subtitle">Login to your account</p>
 
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input 
-          type="password" 
-          id="password"
-          name="password" 
-          placeholder="Enter password" 
-          required>
-      </div>
+      <form action="/auth/login" method="POST" class="login-form">
 
-      <button type="submit" class="btn green login-btn">
-        Login
-      </button>
+        <div class="input-group">
+          <label for="userInput">Email or Mobile</label>
+          <input 
+            type="text" 
+            id="userInput"
+            name="userInput" 
+            placeholder="Enter email or mobile" 
+            required>
+        </div>
 
-    </form>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password"
+            name="password" 
+            placeholder="Enter password" 
+            required>
+        </div>
 
-    <p class="register-text">
-      Don't have an account?
-      <a href="/auth/signup" class="register-link">Sign Up</a>
-    </p>
+        <button type="submit" class="btn green login-btn">Login</button>
 
-  </div>
+      </form>
 
-</section>
+      <p class="register-text">
+        Don't have an account?
+        <a href="/auth/signup">Sign Up</a>
+      </p>
+
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,288 +1,202 @@
-/* 🌍 BODY */
-.body {
-  background: linear-gradient(to right, #a8e063, #56ab2f);
-  font-family: Arial, sans-serif;
-}
-
-/* 📦 CENTER CONTAINER */
-.center-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  background-color: #b9fc99;
-}
-
-/* 🧾 MAIN CARD */
-.crop-card {
-  background: #c2e9a5;
-  padding: 35px;
-  border-radius: 20px;
-  width: 900px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  position: relative;
-}
-
-/* 🏷️ TITLE */
-.title {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #56ab2f;
-}
-
-/* 🔠 HEADINGS */
-.section-heading {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-/* 📚 CARD ROW */
-.card-container {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-/* 🟩 OPTION CARD */
-.card {
-  flex: 1;
-  padding: 15px;
-  text-align: center;
-  background: #57e95e;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: bold;
-}
-
-/* 🎯 HOVER EFFECT */
-.card:hover {
-  background: #d4f5d4;
-}
-
-/* ✅ ACTIVE CARD */
-.card.active {
-  background: green;
-  color: #ffffff;
-  border: 3px solid darkgreen;
-  transform: scale(1.05);
-}
-
-/* 🖼️ IMAGE */
-.card-image {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 5px;
-}
-
-/* 🚀 BUTTON */
-.button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 15px;
-  background: green;
-  color: #ffffff;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* 🔥 BUTTON HOVER */
-.button:hover {
-  background: darkgreen;
-}
-
-/* ❌ CLOSE BUTTON */
-.close-button {
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  font-size: 18px;
-  cursor: pointer;
-  color: white;
-  transition: 0.3s;
-}
-
-.close-button:hover {
-  transform: scale(1.2);
-}
-
-
-/* 🌿 PAGE BACKGROUND */
+/* ================================
+   GENERAL PAGE STYLING
+   ================================ */
 body {
-  background: linear-gradient(to right, #a8e063, #56ab2f);
-  font-family: Arial, sans-serif;
-}
-
-/* 📦 CENTER */
-.center-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-}
-
-/* 🧾 MAIN CARD */
-.crop-card {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 20px;
-  width: 700px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  position: relative;
-  text-align: center;
-}
-
-/* ❌ CLOSE BUTTON */
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-/* 🌦️ WEATHER BADGE (HIGHLIGHT 🔥) */
-.weather-badge {
-  background: linear-gradient(135deg, #36d1dc, #5b86e5);
-  color: white;
-  padding: 10px 18px;
-  border-radius: 20px;
-  font-weight: bold;
-  display: inline-block;
-  margin-bottom: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* 🌾 BEST CROP */
-.crop-card h2 {
-  color: #2e7d32;
-  margin-bottom: 15px;
-}
-
-/* 📊 LIST */
-.crop-list {
-  list-style: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f9fc;
+  margin: 0;
   padding: 0;
-}
-
-.crop-list li {
-  background: #f1f8e9;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.crop-list li:hover {
-  background: #dcedc8;
-  transform: scale(1.03);
-}
-
-/* 📊 CHART AREA */
-#barChart {
-  margin-top: 20px;
-}
-
-/* 💡 TIP BOX */
-.tip {
-  margin-top: 20px;
-  background: #fff3cd;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-/* 🔘 BUTTONS */
-.btn {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 20px;
-  background: green;
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: darkgreen;
-}
-
-/* 🤖 LOADER */
-#aiLoader {
-  text-align: center;
-  margin-top: 100px;
-}
-
-#typingText p {
-  margin: 5px;
-  font-size: 16px;
+  color: #333;
 }
 
 .center-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  padding: 40px 20px;
 }
 
 .crop-card {
   background: #fff;
-  padding: 30px;
-  border-radius: 20px;
-  width: 400px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  padding: 30px 25px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.weather-badge {
-  background: linear-gradient(45deg, #4CAF50, #81C784);
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  font-weight: bold;
+/* ================================
+   CLOSE BUTTON
+   ================================ */
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #000;
 }
 
-.crop-list {
-  list-style: none;
-  padding: 0;
+/* ================================
+   CARD SELECTION STYLING
+   ================================ */
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
-.crop-list li {
-  padding: 8px;
-  margin: 5px 0;
-  background: #f5f5f5;
+.card {
+  background: #f0f0f0;
+  padding: 20px 15px;
+  border-radius: 12px;
+  min-width: 100px;
+  max-width: 140px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.card img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 8px;
 }
 
-.crop-list .best {
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card.active {
+  border-color: #4caf50;
   background: #e8f5e9;
-  font-weight: bold;
 }
 
-.tip {
-  margin-top: 15px;
-  font-size: 14px;
+/* ================================
+   FORM BUTTONS
+   ================================ */
+.btn {
+  display: inline-block;
+  margin: 15px 10px 0 10px;
+  padding: 12px 25px;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn:hover {
+  background: #45a049;
+}
+
+/* ================================
+   AI LOADER
+   ================================ */
+#aiLoader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  font-size: 18px;
   color: #555;
 }
 
-.btn {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 15px;
-  background: #4CAF50;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
+#typingText p {
+  margin: 8px 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
 }
 
-.btn:hover {
-  background: #388e3c;
+/* ================================
+   WEATHER BADGE
+   ================================ */
+.weather-badge {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background: #f1f8e9;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  color: #558b2f;
+  font-weight: bold;
+}
+
+/* ================================
+   CROP LIST & TIPS
+   ================================ */
+.crop-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.crop-list li {
+  background: #f0f0f0;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.crop-list li.best {
+  background: #c8e6c9;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.tip {
+  background: #fff3e0;
+  color: #e65100;
+  font-weight: 500;
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ================================
+   CHART CANVAS
+   ================================ */
+canvas#barChart {
+  margin-top: 25px;
+  max-height: 350px;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+@media (max-width: 600px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 200px;
+  }
+
+  .crop-card {
+    padding: 20px 15px;
+  }
 }

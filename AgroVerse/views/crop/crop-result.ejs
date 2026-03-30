@@ -1,136 +1,138 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Crop Recommendation</title>
 
-<span class="close-btn" onclick="window.location='/'">✖</span>
+  <!-- CSS -->
+  
+  <link rel="stylesheet" href="/css/crop.css">
 
-<!-- 🤖 AI ANALYSIS LOADER -->
-<div id="aiLoader">
-  <h2>Smart Analysis in Progress...</h2>
-  <div id="typingText"></div>
-</div>
 
-<!-- 🌾 RESULT -->
-<div id="resultContent" style="display:none;">
-  <div class="center-page">
-    <div class="crop-card">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
 
-      <!-- 🌦️ WEATHER -->
-      <div class="weather-badge">
-        🌡️ <%= weatherTemp %>°C | 💧 <%= humidity %>%
+  <span class="close-btn" onclick="window.location='/'">✖</span>
+
+  <!-- 🤖 AI ANALYSIS LOADER -->
+  <div id="aiLoader">
+    <h2>Smart Analysis in Progress...</h2>
+    <div id="typingText"></div>
+  </div>
+
+  <!-- 🌾 RESULT -->
+  <div id="resultContent" style="display:none;">
+    <div class="center-page">
+      <div class="crop-card">
+
+        <!-- 🌦️ WEATHER -->
+        <div class="weather-badge">
+          🌡️ <%= weatherTemp %>°C | 💧 <%= humidity %>%
+        </div>
+
+        <!-- 🌾 BEST CROP -->
+        <h2>🌾 Best Crop: <%= recommendedCrop %></h2>
+
+        <!-- 📊 TOP CROPS -->
+        <h3>Top Suggestions</h3>
+        <ul class="crop-list">
+          <% crops.forEach((crop, index) => { %>
+            <li class="<%= index === 0 ? 'best' : '' %>">
+              <%= crop %> - <%= confidence[index] %>% 
+              <% if(index === 0){ %> ✅ <% } %>
+            </li>
+          <% }) %>
+        </ul>
+
+        <!-- 📊 CHART -->
+        <canvas id="barChart"></canvas>
+
+        <!-- 💡 TIP -->
+        <div class="tip">
+          💡 Tip: Choose crops based on water availability and season.
+        </div>
+
+        <!-- 🔗 BUTTONS -->
+        <a href="/crop" class="btn">🔄 Try Again</a>
+        <a href="/disease" class="btn">Check Disease →</a>
+
       </div>
-
-      <!-- 🌾 BEST CROP -->
-      <h2>🌾 Best Crop: <%= recommendedCrop %></h2>
-
-      <!-- 📊 TOP CROPS -->
-      <h3>Top Suggestions</h3>
-      <ul class="crop-list">
-        <% crops.forEach((crop, index) => { %>
-          <li class="<%= index === 0 ? 'best' : '' %>">
-            <%= crop %> - <%= confidence[index] %>% 
-            <% if(index === 0){ %> ✅ <% } %>
-          </li>
-        <% }) %>
-      </ul>
-
-      <!-- 📊 CHART -->
-      <canvas id="barChart"></canvas>
-
-      <!-- 💡 TIP -->
-      <div class="tip">
-        💡 Tip: Choose crops based on water availability and season.
-      </div>
-
-      <!-- 🔗 BUTTONS -->
-      <a href="/crop" class="btn">🔄 Try Again</a>
-      <a href="/disease" class="btn">Check Disease →</a>
-
     </div>
   </div>
-</div>
 
-<!-- ⚙️ SCRIPT -->
-<script>
-const steps = [
-  "Analyzing soil...",
-  "Checking weather...",
-  "Evaluating water level...",
-  "Finalizing recommendation..."
-];
+  <!-- ⚙️ SCRIPT -->
+  <script>
+    const steps = [
+      "Analyzing soil...",
+      "Checking weather...",
+      "Evaluating water level...",
+      "Finalizing recommendation..."
+    ];
 
-let i = 0;
+    let i = 0;
 
-function typeEffect() {
-  if (i < steps.length) {
-    let line = document.createElement("p");
-    document.getElementById("typingText").appendChild(line);
+    function typeEffect() {
+      if (i < steps.length) {
+        let line = document.createElement("p");
+        document.getElementById("typingText").appendChild(line);
 
-    let text = steps[i];
-    let j = 0;
+        let text = steps[i];
+        let j = 0;
 
-    let typing = setInterval(() => {
-      if (j < text.length) {
-        line.textContent += text[j++];
-      } else {
-        clearInterval(typing);
-        line.textContent += " ✔";
-        i++;
-        setTimeout(typeEffect, 600);
-      }
-    }, 40);
-
-  } else {
-    setTimeout(() => {
-      document.getElementById("aiLoader").style.display = "none";
-      document.getElementById("resultContent").style.display = "block";
-
-      // 📊 CHART (CLEAN + COLORFUL)
-      const ctx = document.getElementById("barChart").getContext("2d");
-
-      const crops = <%- JSON.stringify(crops) %>;
-      const confidence = <%- JSON.stringify(confidence) %>;
-
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: crops,
-          datasets: [{
-            label: 'Confidence %',
-            data: confidence,
-
-            // 🎯 Highlight BEST crop
-            backgroundColor: crops.map((_, i) =>
-              i === 0 ? 'rgba(76, 175, 80, 1)' : 'rgba(200,200,200,0.6)'
-            ),
-
-            borderRadius: 12
-          }]
-        },
-        options: {
-          responsive: true,
-          animation: {
-            duration: 1500
-          },
-          plugins: {
-            legend: {
-              labels: {
-                font: {
-                  size: 14,
-                  weight: 'bold'
-                }
-              }
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
+        let typing = setInterval(() => {
+          if (j < text.length) {
+            line.textContent += text[j++];
+          } else {
+            clearInterval(typing);
+            line.textContent += " ✔";
+            i++;
+            setTimeout(typeEffect, 600);
           }
-        }
-      });
+        }, 40);
 
-    }, 800);
-  }
-}
+      } else {
+        setTimeout(() => {
+          document.getElementById("aiLoader").style.display = "none";
+          document.getElementById("resultContent").style.display = "block";
 
-window.onload = typeEffect;
-</script>
+          // 📊 CHART (CLEAN + COLORFUL)
+          const ctx = document.getElementById("barChart").getContext("2d");
+
+          const crops = <%- JSON.stringify(crops) %>;
+          const confidence = <%- JSON.stringify(confidence) %>;
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: crops,
+              datasets: [{
+                label: 'Confidence %',
+                data: confidence,
+                backgroundColor: crops.map((_, i) =>
+                  i === 0 ? 'rgba(76, 175, 80, 1)' : 'rgba(200,200,200,0.6)'
+                ),
+                borderRadius: 12
+              }]
+            },
+            options: {
+              responsive: true,
+              animation: { duration: 1500 },
+              plugins: {
+                legend: { labels: { font: { size: 14, weight: 'bold' } } }
+              },
+              scales: { y: { beginAtZero: true } }
+            }
+          });
+
+        }, 800);
+      }
+    }
+
+    window.onload = typeEffect;
+  </script>
+
+</body>
+</html>

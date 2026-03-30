@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Irrigation Recommendation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ <link rel="stylesheet" href="/css/irrigation.css">
+</head>
+<body>
+
 <div class="center-page">
   <div class="irrigation-card">
 
@@ -5,7 +16,7 @@
     <h2 id="irrigation-heading">Irrigation Recommendation</h2>
 
     <!-- Irrigation Form -->
-    <form id="irrigation-form" action="/irrigation/calculate" method="POST">
+    <form id="irrigation-form" action="#" method="POST">
       <span class="close-btn" onclick="window.location='/'">✖</span>
 
       <label for="crop-select">Select Crop</label>
@@ -31,20 +42,21 @@
       <button id="calculate-btn" type="submit">Calculate</button>
     </form>
 
-    <!-- Recommendation Result -->
-    <% if(result){ %>
-      <div id="recommendation-result" class="recommendation">
-        <h3 id="result-heading">🌊 Irrigation Recommendation</h3>
+    <!-- Recommendation Result (static placeholders) -->
+    <div id="recommendation-result" class="recommendation">
+      <h3 id="result-heading">🌊 Irrigation Recommendation</h3>
 
-        <p><strong>Crop:</strong> <span id="result-crop"><%= result.crop %></span></p>
-        <p><strong>Soil Type:</strong> <span id="result-soil"><%= result.soil %></span></p>
-        <p><strong>Field Area:</strong> <span id="result-area"><%= result.area %> Acres</span></p>
-        <p><strong>Water Requirement:</strong> <span id="result-water"><%= result.waterRequirement %></span></p>
-        <p><strong>Irrigation Method:</strong> <span id="result-method"><%= result.method %></span></p>
-        <p><strong>Irrigation Frequency:</strong> <span id="result-frequency"><%= result.frequency %></span></p>
-        <p><strong>Tips:</strong> <span id="result-tips"><%= result.tips %></span></p>
-      </div>
-    <% } %>
+      <p><strong>Crop:</strong> <span id="result-crop">Rice</span></p>
+      <p><strong>Soil Type:</strong> <span id="result-soil">Loamy Soil</span></p>
+      <p><strong>Field Area:</strong> <span id="result-area">2 Acres</span></p>
+      <p><strong>Water Requirement:</strong> <span id="result-water">5000 Liters</span></p>
+      <p><strong>Irrigation Method:</strong> <span id="result-method">Drip</span></p>
+      <p><strong>Irrigation Frequency:</strong> <span id="result-frequency">3 times/week</span></p>
+      <p><strong>Tips:</strong> <span id="result-tips">Water early morning to reduce evaporation.</span></p>
+    </div>
 
   </div>
 </div>
+
+</body>
+</html>

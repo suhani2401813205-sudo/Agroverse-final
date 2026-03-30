@@ -1,70 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disease Detection Result</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Your custom CSS (link separate CSS file to avoid overwriting) -->
+  <link rel="stylesheet" href="/css/disease.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
 <div class="result-container">
 
-<h2><i class="fas fa-leaf"></i> Disease Detection Result</h2>
-<span class="close-btn" onclick="window.location='/'">✖</span>
+  <h2><i class="fas fa-leaf"></i> Disease Detection Result</h2>
+  <span class="close-btn" onclick="window.location='/'">✖</span>
+
   <div class="result-card">
 
-<!-- Uploaded Image -->
-<div class="image-section">
-  <h4>Uploaded Leaf</h4>
-  <img src="/uploads/<%= uploadedImage %>" alt="Uploaded Image">
-</div>
+    <!-- Uploaded Image -->
+    <div class="image-section">
+      <h4>Uploaded Leaf</h4>
+      <img src="/uploads/<%= uploadedImage %>" alt="Uploaded Image">
+    </div>
 
-<!-- Disease Info -->
-<div class="info-section">
-
-  <h3><%= diseaseName %></h3>
-  <p><i class="fas fa-chart-line"></i> <strong>Confidence:</strong> <%= confidence %>%</p>
-
-<p><i class="fas fa-exclamation-triangle"></i> <strong>Severity:</strong> <%= severity %></p>
-
-<p><i class="fas fa-info-circle"></i> <strong>Description:</strong> <%= severityDesc %></p>
-
-<p><i class="fas fa-bacteria"></i> <strong>Cause:</strong> <%= cause %></p>
-  <hr>
-
-  <p><i class="fas fa-pills"></i> <strong>Treatment:</strong> <%= treatment %></p>
-
-<p><i class="fas fa-shield-alt"></i> <strong>Prevention:</strong> <%= prevention %></p>
-</div>
-
+    <!-- Disease Info -->
+    <div class="info-section">
+      <h3><%= diseaseName %></h3>
+      <p><i class="fas fa-chart-line"></i> <strong>Confidence:</strong> <%= confidence %>%</p>
+      <p><i class="fas fa-exclamation-triangle"></i> <strong>Severity:</strong> <%= severity %></p>
+      <p><i class="fas fa-info-circle"></i> <strong>Description:</strong> <%= severityDesc %></p>
+      <p><i class="fas fa-bacteria"></i> <strong>Cause:</strong> <%= cause %></p>
+      <hr>
+      <p><i class="fas fa-pills"></i> <strong>Treatment:</strong> <%= treatment %></p>
+      <p><i class="fas fa-shield-alt"></i> <strong>Prevention:</strong> <%= prevention %></p>
+    </div>
 
   </div>
 
   <!-- Top 3 Predictions -->
-
   <div class="top3-section">
     <h3><i class="fas fa-search"></i> Top Predictions</h3>
-
-<div class="top3-grid">
-  <% top3.forEach(item => { %>
-    <div class="top-card">
-      <p><%= item.name %></p>
-      <span><%= item.confidence %>%</span>
+    <div class="top3-grid">
+      <% top3.forEach(item => { %>
+        <div class="top-card">
+          <p><%= item.name %></p>
+          <span><%= item.confidence %>%</span>
+        </div>
+      <% }) %>
     </div>
-  <% }) %>
-</div>
-
-
   </div>
-  <!-- 📊 Chart -->
-<div class="chart-section">
-  <h3><i class="fas fa-chart-bar"></i> Prediction Confidence</h3>
-  <canvas id="barChart"></canvas>
-</div>
 
+  <!-- Chart -->
+  <div class="chart-section">
+    <h3><i class="fas fa-chart-bar"></i> Prediction Confidence</h3>
+    <canvas id="barChart"></canvas>
+  </div>
 
   <!-- Grad-CAM (Optional) -->
-
-<% if (gradcamImage) { %> <div class="gradcam-section"> <h3><i class="fas fa-fire"></i> Model Focus (Grad-CAM)</h3> <img src="/gradcam/<%= gradcamImage %>" alt="GradCAM"> </div>
-<% } %>
+  <% if (gradcamImage) { %>
+    <div class="gradcam-section">
+      <h3><i class="fas fa-fire"></i> Model Focus (Grad-CAM)</h3>
+      <img src="/gradcam/<%= gradcamImage %>" alt="GradCAM">
+    </div>
+  <% } %>
 
 </div>
 
-
-<script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<!-- Script to render Chart -->
 <script>
 const labels = <%- JSON.stringify(top3.map(item => item.name)) %>;
 const dataValues = <%- JSON.stringify(top3.map(item => item.confidence)) %>;
@@ -101,3 +109,6 @@ new Chart(ctx, {
   }
 });
 </script>
+
+</body>
+</html>
